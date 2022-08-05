@@ -1,24 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<!-- New line below to use the JSP Standard Tag Library -->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "t" tagdir="/WEB-INF/tags" %>
 
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Time</title>
+<t:base>
+	<div onload="displayInfo('time')" class="d-flex vh-100 align-items-center justify-content-center">
+		<h1 id="time"><c:out value="${time}"/></h1>
+	</div>
+</t:base>
 
-
-	<link rel="stylesheet" href="/webjars/bootstrap/css/bootstrap.min.css" />
-	<script src="/webjars/jquery/jquery.min.js"></script>
-	<script src="/webjars/bootstrap/js/bootstrap.min.js"></script>
-    
-    <link rel="stylesheet" type="text/css" href="/css/style.css">
-	<script type="text/javascript" src="/js/app.js"></script>
-</head>
-<body onload="displayInfo('time')" class="d-flex vh-100 align-items-center justify-content-center">
-	<h1 id="time"><c:out value="${time}"/></h1>
-</body>
-</html>
