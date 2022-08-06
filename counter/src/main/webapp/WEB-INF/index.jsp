@@ -7,5 +7,11 @@
 
 <title></title>
 <t:base>
+<div class="d-flex vh-100 align-items-center justify-content-center flex-column">
+	<h1 class="display-1">Welcome User!</h1>
+	<div class="lead d-flex">
+		<a href="/your_server/counter">counter page</a>
+	</div>
+</div>
 </t:base>
 	
