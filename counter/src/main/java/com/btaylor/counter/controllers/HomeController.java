@@ -1,7 +1,7 @@
 package com.btaylor.counter.controllers;
 
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -9,8 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HomeController {
 	
 	@RequestMapping("/")
-	public String counter(Model model) {
-		
-		return "fruitStore.jsp";
+	public String index(HttpSession session) {
+		session.setAttribute("name", "Brandon");
+		return "index.jsp";
+	}
+	
+	@RequestMapping("/counter")
+	public String counter(HttpSession session) {
+		String userName = (String) session.getAttribute("name");
+		System.out.println("The name is "+userName);
+		return "counter.jsp";
 	}
 }

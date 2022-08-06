@@ -8,12 +8,12 @@
 		<version>2.7.2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.btaylor.hoppersreceipt</groupId>
-	<artifactId>hoppersReceipt</artifactId>
+	<groupId>com.btaylor.displayDate</groupId>
+	<artifactId>displayDate</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>hoppersReceipt</name>
-	<description>Hoppers Receipt</description>
+	<name>displayDate</name>
+	<description>Display Date</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
