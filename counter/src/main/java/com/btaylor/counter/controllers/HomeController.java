@@ -20,7 +20,7 @@ public class HomeController {
 			session.setAttribute("count", newCount);
 		}
 		return "index.jsp";
-	}
+	} 
 	
 	@RequestMapping("counter")
 	public String counter(HttpSession session, Model model) {
