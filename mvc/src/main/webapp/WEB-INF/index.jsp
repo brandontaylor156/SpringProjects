@@ -29,6 +29,7 @@
 			</c:forEach>
 		</tbody>
 	</table>
+	<a href="/books/add">Add book</a>
 </div>
 </t:base>
 	
