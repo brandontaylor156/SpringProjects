@@ -5,7 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "t" tagdir="/WEB-INF/tags" %>
 
-<title>Hello</title>
+<title>Reading Books</title>
 <t:base>
 <div class="container d-flex vh-100 flex-column align-items-center justify-content-center">
 	<h3 class="display-3">Title: <c:out value="${book.title}"/></h3>
