@@ -9,25 +9,29 @@
 <t:base>
 <div class="container d-flex vh-100 flex-column align-items-center justify-content-center">
 	<h4 class="display-4">New Book</h4>
-	<form action="/books/add" method="post">
+	<form:form action="/books/add" method="post" modelAttribute="book">
 		<div class="mb-3">
-			<label for="title" class="form-label">Title:</label>
-			<input type="text" class="form-control" name="title">
+			<form:label for="title" class="form-label" path="title">Title:</form:label>
+			<form:errors path="title" class="text-danger" />
+			<form:input type="text" class="form-control" path="title"/>
 		</div>
 		<div class="mb-3">
-		  <label for="description" class="form-label">Description:</label>
-		  <input type="text" class="form-control" name="description">
+		  <form:label for="description" class="form-label" path="description">Description:</form:label>
+		  <form:errors path="description" class="text-danger" />
+		  <form:input type="text" class="form-control" path="description"/>
 		</div>
 		<div class="mb-3">
-		  <label for="language" class="form-label">Language:</label>
-		  <input type="text" class="form-control" name="language">
+		  <form:label for="language" class="form-label" path="language">Language:</form:label>
+		  <form:errors path="language" class="text-danger" />
+		  <form:input type="text" class="form-control" path="language"/>
 		</div>
 		<div class="mb-3">
-			<label for="pages" class="form-label">Pages:</label>
-			<input type="number" class="form-control" min="100" name="pages">
+			<form:label for="numberOfPages" class="form-label" path="numberOfPages">Pages:</form:label>
+			<form:errors path="numberOfPages" class="text-danger" />
+			<form:input type="number" class="form-control" min="100" path="numberOfPages"/>
 		</div>
 		<button type="submit" class="btn btn-primary">Send</button>
-	</form>
+	</form:form>
 </div>
 </t:base>
 	

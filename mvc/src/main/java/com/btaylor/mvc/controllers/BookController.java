@@ -2,14 +2,17 @@ package com.btaylor.mvc.controllers;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.btaylor.mvc.models.Book;
 import com.btaylor.mvc.services.BookService;
@@ -38,19 +41,18 @@ public class BookController {
 	}
 	
 	@GetMapping("add")
-	public String form() {
+	public String form(@ModelAttribute("book") Book book) {
 		return "add.jsp";
 	}
 	
 	@PostMapping("add")
 	public String create(
-		@RequestParam("title") String title,
-		@RequestParam("description") String description, 
-		@RequestParam("language") String language,
-		@RequestParam("pages") Integer pages
-			)
+		@Valid @ModelAttribute("book") Book book,
+		BindingResult result)
 	{
-		Book book = new Book(title, description, language, pages);
+		if (result.hasErrors()) {
+			return "add.jsp";
+		}
 		bookService.createBook(book);
 		return "redirect:";
 	}
