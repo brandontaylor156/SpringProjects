@@ -35,13 +35,8 @@ public class ExpenseService {
         }
     }
     
-    public Expense updateExpense(Long id, String name, String vendor, BigDecimal amount, String description) {
-    	Expense expenseToUpdate = findExpense(id);
-    	expenseToUpdate.setName(name);
-    	expenseToUpdate.setVendor(vendor);
-    	expenseToUpdate.setAmount(amount);
-    	expenseToUpdate.setDescription(description);
-    	return expenseRepository.save(expenseToUpdate);
+    public Expense updateExpense(Expense expense) {
+    	return expenseRepository.save(expense);
     }
     
     public void deleteExpense(Long id) {

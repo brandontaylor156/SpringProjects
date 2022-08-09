@@ -5,55 +5,35 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "t" tagdir="/WEB-INF/tags" %>
 
-<title>Read Share</title>
+<title>Edit My Task</title>
 <t:base>
 <div class="container-fluid d-flex flex-column align-items-center justify-content-center p-5">
-	<h2 class="display-2">Save Travels</h2>
-	<table class="table table striped">
-		<thead>
-			<tr>
-				<th scope="col">Expense</th>
-				<th scope="col">Vendor</th>
-				<th scope="col">Amount</th>
-				<th scope="col">Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach var="expense" items="${expenses}">
-			<tr>
-				<td>${expense.name}</td>
-				<td>${expense.vendor}</td>
-				<td><fmt:formatNumber type="CURRENCY" currencySymbol="$" maxFractionDigits="2" minFractionDigits="2" value="${expense.amount}"/></td>
-				<td><a href="/expenses/edit/${expense.id}">edit</a></td>
-			</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	
-	<h4 class="display-4">Add an expense</h4>
-	<form:form action="/expenses/add" method="post" modelAttribute="expense">
+	<h4 class="display-4">Edit expense</h4>
+	<form:form action="/expenses/edit/${expense.id}" method="post" modelAttribute="expense">
+		<input type="hidden" name="_method" value="put">
 		<div class="mb-3">
 			<form:label for="name" class="form-label" path="name">Expense:</form:label>
 			<form:errors path="name" class="text-danger" />
-			<form:input type="text" class="form-control" path="name"/>
+			<form:input type="text" class="form-control" path="name" value="${expense.name}"/>
 		</div>
 		<div class="mb-3">
 		  <form:label for="vendor" class="form-label" path="vendor">Vendor:</form:label>
 		  <form:errors path="vendor" class="text-danger" />
-		  <form:input type="text" class="form-control" path="vendor"/>
+		  <form:input type="text" class="form-control" path="vendor" value="${expense.vendor}"/>
 		</div>
 		<div class="mb-3">
 		  <form:label for="amount" class="form-label" path="amount">Amount:</form:label>
 		  <form:errors path="amount" class="text-danger" />
-		  <form:input type="text" class="form-control" path="amount"/>
+		  <form:input type="text" class="form-control" path="amount" value="${expense.amount}"/>
 		</div>
 		<div class="mb-3">
 			<form:label for="description" class="form-label" path="description">Description:</form:label>
 			<form:errors path="description" class="text-danger" />
-			<form:input type="text" class="form-control" path="description"/>
+			<form:input type="text" class="form-control" path="description" value="${expense.description}"/>
 		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form:form>
+	<a class="lead" href="/expenses">go back</a>
 </div>
 </t:base>
 	
