@@ -36,4 +36,4 @@
 	<a class="lead" href="/expenses">go back</a>
 </div>
 </t:base>
-	
+
