@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,6 +26,7 @@ public class Expense {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long Id;
 	
+	//not empty
 	@NotNull
     @Size(min = 1, max = 200)
     private String name;
