@@ -1,4 +1,4 @@
-package com.btaylor.dojosandninjas.models;
+package com.example.studentroster.models;
 
 import java.util.Date;
 import java.util.List;
@@ -13,32 +13,38 @@ import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
-@Table(name="dojos")
-public class Dojo {
-    
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
-    private String name;
-    
-    @Column(updatable=false)
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date createdAt;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date updatedAt;
-    
-    @OneToMany(mappedBy="dojo", fetch = FetchType.LAZY)
-    private List<Ninja> ninjas;
-    
-    public Dojo() {
-    }
-    
-    @PrePersist
+@Table(name="dorms")
+public class Dorm {
+	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Long id;
+	
+	@NotEmpty
+	private String name;
+	
+	@Column(updatable=false)
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date createdAt;
+	@DateTimeFormat(pattern="yyyy-MM-dd")
+	private Date updatedAt;
+	
+	@OneToMany(mappedBy="dorm", fetch = FetchType.LAZY)
+	private List<Student> students;
+	
+	public Dorm(){
+	}
+	
+	public Dorm(String name) {
+		this.name = name;
+	}
+
+	@PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
     }
@@ -79,12 +85,13 @@ public class Dojo {
 		this.updatedAt = updatedAt;
 	}
 
-	public List<Ninja> getNinjas() {
-		return ninjas;
+	public List<Student> getStudents() {
+		return students;
 	}
 
-	public void setNinjas(List<Ninja> ninjas) {
-		this.ninjas = ninjas;
+	public void setStudents(List<Student> students) {
+		this.students = students;
 	}
-
+    
+    
 }

@@ -1,6 +1,7 @@
 package com.example.websocketdemo.model;
 
 // This is the message payload that will be exchanged between the clients and the server. 
+// Class for each message being sent
 
 public class ChatMessage {
     private MessageType type;

@@ -12,6 +12,7 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -25,15 +26,15 @@ public class Song {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private long Id;
 	
-	@NotNull
+	@NotEmpty
 	@Size(min=1, max=255)
 	private String title;
 	
-	@NotNull
+	@NotEmpty
 	@Size(min=1, max=255)
 	private String artist;
 	
-	@NotNull
+	@NotEmpty
 	@Min(1)
 	@Max(10)
 	private int rating;

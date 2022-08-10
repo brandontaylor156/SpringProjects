@@ -17,12 +17,17 @@ var colors = [
 ];
 
 function connect(event) {
+	
+	// .trim() removes whitespace
+	// store value of tag with id "name" inside username
     username = document.querySelector('#name').value.trim();
 
+	// if username present, hide userName page, show chat page
     if(username) {
         usernamePage.classList.add('hidden');
         chatPage.classList.remove('hidden');
 
+		
         var socket = new SockJS('/ws');
         stompClient = Stomp.over(socket);
 
