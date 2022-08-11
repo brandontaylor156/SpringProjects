@@ -5,11 +5,11 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix = "t" tagdir="/WEB-INF/tags" %>
 
-<title>Login & Registration</title>
+<title>Book Club</title>
 <t:base>
-<div class="container">
-	<h6 class="display-6">Welcome!</h6>
-	<p class="lead">Join our growing community.</p>
+<div class="container mt-5">
+	<h6 class="display-6">Book Club</h6>
+	<p class="lead">A place for friends to share thoughts on books.</p>
 	
 	<div class="row">
 		<div class="col">

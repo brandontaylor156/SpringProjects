@@ -16,21 +16,28 @@ import com.btaylor.authentication.models.User;
 import com.btaylor.authentication.services.UserService;
 
 @Controller
-public class HomeController {
+public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/home")
-	public String home(Model model, HttpSession session) {
-		if (session.getAttribute("username")==null)
-			return "redirect:/";
-		model.addAttribute("username", session.getAttribute("username"));
-		return "/views/home.jsp";
-	}
 	
 	@GetMapping("/")
 	public String index(Model model) {
+		model.addAttribute("newUser", new User());
+		model.addAttribute("newLogin", new LoginUser());
+		return "/views/login.jsp";
+	}
+	
+	@GetMapping("/register")
+	public String register(Model model) {
+		model.addAttribute("newUser", new User());
+		model.addAttribute("newLogin", new LoginUser());
+		return "/views/login.jsp";
+	}
+	
+	@GetMapping("/login")
+	public String login(Model model) {
 		model.addAttribute("newUser", new User());
 		model.addAttribute("newLogin", new LoginUser());
 		return "/views/login.jsp";
@@ -53,14 +60,14 @@ public class HomeController {
 		else {
 			session.setAttribute("id", newUser.getId());
 			session.setAttribute("username", newUser.getUsername());
-			return "redirect:/home";
+			return "redirect:/books";
 		}
 	}
 	
 	@PostMapping("/login")
 	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, 
 			BindingResult result, Model model, HttpSession session) {
-		if(result.hasErrors()) {
+		if(result.hasErrors() || userService.login(newLogin, result)==null) {
 			model.addAttribute("newUser", new User());
 			return "/views/login.jsp";
 		}
@@ -68,7 +75,7 @@ public class HomeController {
 			User loggedUser = userService.login(newLogin, result);
 			session.setAttribute("id", loggedUser.getId());
 			session.setAttribute("username", loggedUser.getUsername());
-			return "redirect:/home";
+			return "redirect:/books";
 		}
 	}
 }
