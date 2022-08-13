@@ -1,12 +1,13 @@
-<!DOCTYPE html>
-<html>
-  <head>
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-      <title>Spring Boot WebSocket Chat Application</title>
-      <link rel="stylesheet" href="/css/main.css" />
-  </head>
-  <body>
-    <noscript>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page isErrorPage="true" %>
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix = "t" tagdir="/WEB-INF/tags" %>
+
+<title></title>
+<t:base>
+<noscript>
       <h2>Sorry! Your browser doesn't support Javascript</h2>
     </noscript>
 
@@ -44,9 +45,5 @@
             </form>
         </div>
     </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-    <script src="/js/main.js"></script>
-  </body>
-</html>
+</t:base>
+	

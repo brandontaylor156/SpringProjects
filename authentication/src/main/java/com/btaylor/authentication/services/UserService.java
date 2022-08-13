@@ -21,14 +21,14 @@ public class UserService {
 		
 		Optional<User> optionalUser = userRepository.findByEmail(newUser.getEmail());
 		
-		if(optionalUser.isPresent() || !(newUser.getPassword().equals(newUser.getConfirm()))) {
-			if(optionalUser.isPresent()) 
-				result.rejectValue("email", "Exists", "The Email Already Belongs to an Account");
-			if(!(newUser.getPassword().equals(newUser.getConfirm()))) {
-				result.rejectValue("confirm", "Matches", "The Confirm Password must match Password!");
-			}
+		if(optionalUser.isPresent()) 
+			result.rejectValue("email", "Exists", "The Email Already Belongs to an Account");
+		if(!(newUser.getPassword().equals(newUser.getConfirm()))) 
+			result.rejectValue("confirm", "Matches", "The Confirm Password must match Password!");
+			
+		if (result.hasErrors())
 			return null;
-		}
+		
 		
 		String hashed = BCrypt.hashpw(newUser.getPassword(), BCrypt.gensalt());
 		newUser.setPassword(hashed);
@@ -39,16 +39,18 @@ public class UserService {
 	public User login(LoginUser newLoginObject, BindingResult result) {
 		
 		Optional<User> optionalUser = userRepository.findByEmail(newLoginObject.getEmail());
-		User user = optionalUser.get();
 		
-		if(!(optionalUser.isPresent()) || !BCrypt.checkpw(newLoginObject.getPassword(), user.getPassword())) {
-			if(!(optionalUser.isPresent()))
-				result.rejectValue("email", "Not Present", "The Email NOT Present");
-			if(!BCrypt.checkpw(newLoginObject.getPassword(), user.getPassword()))
-				result.rejectValue("password", "Matches", "Invalid Password!");
+		if(!(optionalUser.isPresent())) {
+			result.rejectValue("email", "Not Present", "The Email NOT Present");
 			return null;
 		}
-		
+			
+		User user = optionalUser.get();
+			
+		if(!BCrypt.checkpw(newLoginObject.getPassword(), user.getPassword())) {
+			result.rejectValue("password", "Matches", "Invalid Password!");
+			return null;
+		}
 		return user;
 		
 	}	

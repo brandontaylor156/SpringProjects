@@ -53,7 +53,8 @@ public class UserController {
 	public String register(@Valid @ModelAttribute("newUser") User newUser,
 			BindingResult result, Model model, HttpSession session) {
 
-		if(result.hasErrors() || userService.register(newUser, result)==null) {
+		User potentialUser =  userService.register(newUser, result);
+		if(result.hasErrors()) {
 			model.addAttribute("newLogin", new LoginUser());
 			return "/views/login.jsp";
 		}
@@ -67,7 +68,9 @@ public class UserController {
 	@PostMapping("/login")
 	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, 
 			BindingResult result, Model model, HttpSession session) {
-		if(result.hasErrors() || userService.login(newLogin, result)==null) {
+		
+		User potentialUser = userService.login(newLogin, result);
+		if(result.hasErrors()) {
 			model.addAttribute("newUser", new User());
 			return "/views/login.jsp";
 		}

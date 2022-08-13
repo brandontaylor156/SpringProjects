@@ -1,5 +1,6 @@
 package com.btaylor.authentication.models;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -56,7 +57,20 @@ public class User {
   
     public User() {}
     
-    @PrePersist
+    public User(
+			String username,
+			String email,
+			String password) {
+		super();
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.books = new ArrayList<Book>();
+	}
+
+
+
+	@PrePersist
     protected void onCreate(){
         this.createdAt = new Date();
     }
