@@ -24,7 +24,7 @@
 	</form:form>
 	
 	<c:forEach var="task" items="${project.tasks}">
-		<p><span class="strong">Added by ${task.creator.firstName} at ${task.createdAt}</span></p>
+		<p><span class="fw-bold">Added by ${task.creator.firstName} at ${task.createdAt}</span></p>
 		<p>${task.description}</p>
 	</c:forEach>
 </div>

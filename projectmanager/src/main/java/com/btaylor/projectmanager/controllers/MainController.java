@@ -88,6 +88,36 @@ public class MainController {
 		return "/views/showProject.jsp";
 	}
 	
+	@GetMapping("/projects/{id}/tasks")
+	public String showTasks(@PathVariable("id") Long id, HttpSession session, Model model, @ModelAttribute("task") Task task) {
+		if (session.getAttribute("id")==null)
+			return "redirect:/";
+		Project project = projectService.findProjectById(id);
+		model.addAttribute("project", project);
+		model.addAttribute("id", (Long)session.getAttribute("id"));
+		return "/views/tasks.jsp";
+	}
+	
+	@PostMapping("/projects/{id}/tasks")
+	public String createTask(@Valid @ModelAttribute("task") Task task, BindingResult result, 
+			HttpSession session, Model model, @PathVariable("id") Long id) {
+		if (session.getAttribute("id")==null)
+			return "redirect:/";
+		
+		Project thisProject = projectService.findProjectById(id);
+		
+		if (result.hasErrors()) {
+			model.addAttribute("project", thisProject);
+			model.addAttribute("id", (Long)session.getAttribute("id"));
+			return "/views/tasks.jsp";
+		}
+		else {
+			taskService.createTask(task);
+			return "redirect:/projects/" + id + "/tasks";
+		}
+		
+	}
+	
 	@GetMapping("/projects/{id}/edit")
 	public String editProject(@PathVariable("id") Long id, HttpSession session, Model model) {
 		if (session.getAttribute("id")==null)
@@ -162,33 +192,4 @@ public class MainController {
 		return "redirect:/dashboard";
 	}
 	
-	@GetMapping("/projects/{id}/tasks")
-	public String showTasks(@PathVariable("id") Long id, HttpSession session, Model model, @ModelAttribute("task") Task task) {
-		if (session.getAttribute("id")==null)
-			return "redirect:/";
-		Project project = projectService.findProjectById(id);
-		model.addAttribute("project", project);
-		model.addAttribute("id", (Long)session.getAttribute("id"));
-		return "/views/tasks.jsp";
-	}
-	
-	@PostMapping("/projects/{id}/tasks")
-	public String createTask(@Valid @ModelAttribute("task") Task task, BindingResult result, 
-			HttpSession session, Model model, @PathVariable("id") Long id) {
-		if (session.getAttribute("id")==null)
-			return "redirect:/";
-		
-		Project thisProject = projectService.findProjectById(id);
-		
-		if (result.hasErrors()) {
-			model.addAttribute("project", thisProject);
-			model.addAttribute("id", (Long)session.getAttribute("id"));
-			return "/views/tasks.jsp";
-		}
-		else {
-			taskService.createTask(task);
-			return "redirect:/projects/" + id + "/tasks";
-		}
-		
-	}
 }
