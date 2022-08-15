@@ -56,19 +56,17 @@ public class MainController {
 			BindingResult result,
 			@RequestParam("list") String list,
 			Model model) {
-		List<Tag> tags = tagService.allTags();
-		model.addAttribute("tags", tags);
 		
 		// THIS IS FOR QUESTION ERRORS, TAG ERRORS SEPARATE BECAUSE OF REQUESTPARAM
 		if (result.hasErrors())
 			return "/views/newQuestion.jsp";
 		else {
+			// Takes string and converts it to list if valid (below for function)
 			List<Tag> questionTags = checkTags(list);
 			
 			if(questionTags!=null) {
-				Question newQuestion = new Question(question.getQuestion());
-				newQuestion.setTags(questionTags);
-				questionService.createQuestion(newQuestion);
+				question.setTags(questionTags);
+				questionService.createQuestion(question);
 			}
 			else {
 				model.addAttribute("errorMsg", "You can only enter up to three tags (lowercase and separated by comma)");
@@ -104,13 +102,20 @@ public class MainController {
 	}
 	
 	private List<Tag> checkTags(String tagString){
+		// Gets rid of front and back whitespace of string as a whole, separates by commas
 		String[] splitTags = tagString.trim().split(",");
+		
+		// Empty list for tags
 		List<Tag> tempTags = new ArrayList<>();
+		
+		// Return null if more than 3 tags
 		if (splitTags.length>3) {
 			return null;
 		}
 		
+		
 		for(String s: splitTags) {
+			// convert every element to trimmed and lowercase 
 			s = s.trim().toLowerCase();
 			if(tagService.findTagBySubject(s)==null && s.length()>0) {
 				tempTags.add(new Tag(s));
