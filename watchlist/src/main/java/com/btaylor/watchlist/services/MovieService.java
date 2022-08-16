@@ -42,5 +42,9 @@ public class MovieService {
 	public List<Movie> allMoviesByYear(){
 		return movieRepository.findAllByOrderByYearAsc();
 	}
+	
+	public List<Movie> searchMoviesByTitle(String search){
+		return movieRepository.findByTitleContaining(search);
+	}
 }
 

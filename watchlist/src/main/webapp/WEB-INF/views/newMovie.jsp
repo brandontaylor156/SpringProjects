@@ -26,7 +26,7 @@
 		<div class="mb-3">
 			<form:label for="year" class="form-label" path="year">Release:</form:label>
 			<form:errors path="year" class="text-danger" />
-			<form:input type="number" min="1900" max="2022" class="form-control" path="year"/>
+			<form:input type="number" value="2022" class="form-control" path="year"/>
 		</div>
 		<div class="mb-3">
 			<form:label for="description" class="form-label" path="description">Description:</form:label>

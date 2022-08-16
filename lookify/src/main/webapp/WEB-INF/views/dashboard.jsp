@@ -13,6 +13,12 @@
 		<a href="/search/topTen">Top Songs</a>
 		<form action="/search">
 			<input type="search" name="search">
+			<select class="form-select form-select-sm" name="type">
+  				<option selected value="title">Title</option>
+  				<option value="genre">Genre</option>
+  				<option value="year">Year</option>
+  				<option value="poster">Poster</option>		
+			</select>
 			<input type="submit" value="Search"> 
 		</form>
 	</div>

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.btaylor.watchlist.models.Movie;
 import com.btaylor.watchlist.models.User;
@@ -153,6 +154,18 @@ public class MainController {
 		
 		movieService.deleteMovie(id);
 		return "redirect:/dashboard";
+	}
+	
+	@GetMapping("/movies/search")
+	public String searchMovies(
+			@RequestParam(value="search") String search,
+			Model model) {
+		
+		List<Movie> foundMovies = movieService.searchMoviesByTitle(search);
+		
+		model.addAttribute("foundMovies", foundMovies);
+		model.addAttribute("query", search);
+		return "/views/results.jsp";
 	}
 
 }

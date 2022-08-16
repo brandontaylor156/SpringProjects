@@ -3,7 +3,6 @@ package com.btaylor.watchlist.models;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -43,7 +42,6 @@ public class User {
     private String password;
     
     @Transient
-    @Size(min=8, max=128, message="Confirm Password must be between 8 and 128 characters")
     private String confirm;
     
     @Column(updatable=false)
@@ -62,12 +60,12 @@ public class User {
     	this.updatedAt = new Date();
     }
     
-    @ManyToMany(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
     		name="users_movies",
     		joinColumns = @JoinColumn(name="user_id"),
     		inverseJoinColumns = @JoinColumn(name="movie_id")
-    		)
+    	)
     private List<Movie> movies;
     
     public User() {}

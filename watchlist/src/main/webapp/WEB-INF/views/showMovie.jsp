@@ -14,15 +14,19 @@
 		<a href="/movies/new">Add a Movie to Your Watch List</a>
 	</div>
 	<h6 class="display-6">Movie Title: ${movie.title}</h6>
-	<p class="lead">Seen by ${movie.users.size()} People</p>
-	<p class="lead">Genre: ${movie.genre}</p>
-	<p class="lead">Release Year: ${movie.year}</p>
-	<p class="lead">Description: ${movie.description}</p>
+	<p class="lead"><span class="fw-bold">Posted by:</span> ${movie.creator.username}</p>
+	<p class="lead"><span class="fw-bold">Seen by:</span> ${movie.users.size()} People</p>
+	<p class="lead"><span class="fw-bold">Genre:</span> ${movie.genre}</p>
+	<p class="lead"><span class="fw-bold">Release Year:</span> ${movie.year}</p>
+	<p class="lead"><span class="fw-bold">Description:</span> ${movie.description}</p>
 	
 	<c:if test="${movie.creator.id == id}">
-	<div class="in-line">
-		<a href="/movies/${movie.id}/edit">Edit</a>
-		<a href="/movies/${movie.id}/delete">Delete</a>
+	<div class="d-flex align-items-center gap-2">
+		<a href="/movies/${movie.id}/edit" class="btn btn-success">Edit</a>
+		<form class="mb-0" action="/movies/${movie.id}/delete" method="post">
+    		<input type="hidden" name="_method" value="delete">
+    		<button class="btn btn-danger" type="submit">Delete</button>
+		</form>
 	</div>
 	</c:if>
 </div>

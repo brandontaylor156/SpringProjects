@@ -16,4 +16,5 @@ public interface MovieRepository extends CrudRepository<Movie, Long>{
 	Movie findByIdIs(Long id);
 	List<Movie> findAllByCreatorOrderByYearAsc(User user);
 	List<Movie> findAllByOrderByYearAsc();
-}
+	List<Movie> findByTitleContaining(String search);
+ }

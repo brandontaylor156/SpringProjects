@@ -19,6 +19,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
@@ -35,8 +36,9 @@ public class Movie {
     @Size(min=3, message="Genre must be at least 3 characters")
     private String genre;
     
-    @NotNull
-    private Long year;
+    @NotNull(message="Release year required")
+    @Range(min=1900, max=2022, message="Year must be between 1900 and 2022")
+    private Integer year;
     
     @Size(min=10, message="Description must be at least 10 characters")
     private String description;
@@ -88,10 +90,10 @@ public class Movie {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	public Long getYear() {
+	public Integer getYear() {
 		return year;
 	}
-	public void setYear(Long year) {
+	public void setYear(Integer year) {
 		this.year = year;
 	}
 	public String getDescription() {

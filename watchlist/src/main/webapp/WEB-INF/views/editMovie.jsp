@@ -27,14 +27,14 @@
 		<div class="mb-3">
 			<form:label for="year" class="form-label" path="year">Release:</form:label>
 			<form:errors path="year" class="text-danger" />
-			<form:input type="number" min="1900" max="2022" class="form-control" path="year" value="${thisMovie.year}"/>
+			<form:input type="number" class="form-control" path="year" value="${thisMovie.year}"/>
 		</div>
 		<div class="mb-3">
 			<form:label for="description" class="form-label" path="description">Description:</form:label>
 			<form:errors path="description" class="text-danger" />
 			<form:textarea class="form-control" path="description" value="${thisMovie.description}"/>
 		</div>
-		<div class="in-line">
+		<div class="d-flex align-items-center gap-2">
 			<a class="btn btn-danger" href="/dashboard">Cancel</a>
 			<button type="submit" class="btn btn-primary">Edit Movie</button>
 		</div>
