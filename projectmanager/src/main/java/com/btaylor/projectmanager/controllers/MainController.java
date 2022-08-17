@@ -35,6 +35,8 @@ public class MainController {
 	@Autowired
 	TaskService taskService;
 	
+	/******************************************************************************************/
+	
 	@GetMapping("/dashboard")
 	public String dashboard(Model model, HttpSession session) {
 		if (session.getAttribute("id")==null)
@@ -48,6 +50,8 @@ public class MainController {
 		return "/views/dashboard.jsp";
 	}
 	
+	/******************************************************************************************/
+	
 	@GetMapping("/projects/new")
 	public String newProject(
 			@ModelAttribute("project") Project project, HttpSession session, Model model) {
@@ -57,6 +61,8 @@ public class MainController {
 		model.addAttribute("id", (Long)session.getAttribute("id"));
 		return "/views/newProject.jsp";
 	}
+	
+	/******************************************************************************************/
 	
 	@PostMapping("/projects/new")
 	public String addProject(
@@ -77,16 +83,22 @@ public class MainController {
 		}
 	}
 	
+	/******************************************************************************************/
+	
 	@GetMapping("/projects/{id}")
 	public String showProject(@PathVariable("id") Long id, Model model, HttpSession session) {
 		if (session.getAttribute("id")==null)
 			return "redirect:/";
 		
 		Project project = projectService.findProjectById(id);
+		User user = userService.findUserById((Long)session.getAttribute("id"));
+		
 		model.addAttribute("project", project);
-		model.addAttribute("id", session.getAttribute("id"));
+		model.addAttribute("user", user);
 		return "/views/showProject.jsp";
 	}
+	
+	/******************************************************************************************/
 	
 	@GetMapping("/projects/{id}/tasks")
 	public String showTasks(@PathVariable("id") Long id, HttpSession session, Model model, @ModelAttribute("task") Task task) {
@@ -97,6 +109,8 @@ public class MainController {
 		model.addAttribute("id", (Long)session.getAttribute("id"));
 		return "/views/tasks.jsp";
 	}
+	
+	/******************************************************************************************/
 	
 	@PostMapping("/projects/{id}/tasks")
 	public String createTask(@Valid @ModelAttribute("task") Task task, BindingResult result, 
@@ -118,6 +132,8 @@ public class MainController {
 		
 	}
 	
+	/******************************************************************************************/
+	
 	@GetMapping("/projects/{id}/edit")
 	public String editProject(@PathVariable("id") Long id, HttpSession session, Model model) {
 		if (session.getAttribute("id")==null)
@@ -128,6 +144,8 @@ public class MainController {
 		model.addAttribute("id", (Long)session.getAttribute("id"));
 		return "/views/editProject.jsp";
 	}
+	
+	/******************************************************************************************/
 	
 	@PutMapping("/projects/{id}/edit")
 	public String updateProject(@Valid @ModelAttribute("project") Project project, 
@@ -150,6 +168,8 @@ public class MainController {
 		
 	}
 	
+	/******************************************************************************************/
+	
 	@PutMapping("/projects/{id}/join")
 	public String joinProject(@PathVariable("id") Long id, HttpSession session) {
 		if (session.getAttribute("id")==null)
@@ -162,6 +182,8 @@ public class MainController {
 		
 		return "redirect:/dashboard";
 	}
+	
+	/******************************************************************************************/
 	
 	@PutMapping("/projects/{id}/leave")
 	public String leaveProject(@PathVariable("id") Long id, HttpSession session) {
@@ -182,6 +204,8 @@ public class MainController {
 		
 		return "redirect:/dashboard";
 	}
+	
+	/******************************************************************************************/
 	
 	@DeleteMapping("/projects/{id}/delete")
 	public String delete(@PathVariable("id") Long id, HttpSession session) {

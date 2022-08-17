@@ -7,7 +7,7 @@
 
 <title>Project Manager</title>
 <t:base>
-<div class="container mt-5">
+<div class="container d-flex vh-100 justify-content-center flex-column">
 	<h6 class="display-6">Project Manager</h6>
 	<p class="lead">A place for teams to manage projects.</p>
 	

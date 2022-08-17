@@ -24,11 +24,11 @@ public class ProjectService {
 	}
 	
 	public List<Project> allProjectsContainingUser(User user){
-		return projectRepository.findAllByUsers(user);
+		return projectRepository.findAllByUsersOrderByDueDateAsc(user);
 	}
 	
 	public List<Project> allProjectsNotContainingUser(User user){
-		return projectRepository.findByUsersNotContains(user);
+		return projectRepository.findByUsersNotContainsOrderByDueDateAsc(user);
 	}
 	
 	public Project createProject(Project p) {

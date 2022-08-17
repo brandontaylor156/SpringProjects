@@ -7,7 +7,7 @@
 
 <title>New Project</title>
 <t:base>
-<div class="container">
+<div class="container mt-3">
 	<h3 class="display-3">Create a Project</h3>
 	<form:form action="/projects/new" method="post" modelAttribute="project">
 		<form:input type="hidden" path="lead" value="${id}"/>

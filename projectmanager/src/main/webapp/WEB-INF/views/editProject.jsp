@@ -7,7 +7,7 @@
 
 <title>Edit Project</title>
 <t:base>
-<div class="container mt-5">
+<div class="container mt-3">
 	<h3 class="display-3">Edit Project</h3>
 	<form:form action="/projects/${project.id}/edit" method="post" modelAttribute="project">
 		<input type="hidden" name="_method" value="put">

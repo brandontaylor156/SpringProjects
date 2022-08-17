@@ -7,45 +7,25 @@
 
 <title>Project Details</title>
 <t:base>
-<div class="container mt-5">
-	<a href="/dashboard">Dashboard</a>
-
-	<div class="row">
-		<div class="col">
-			<p class="lead">Project:</p>
-		</div>
-		<div class="col">
-			<p class="lead">${project.title}</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
-			<p class="lead">Description:</p>
-		</div>
-		<div class="col">
-			<p class="lead">${project.description}</p>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col">
-			<p class="lead">Due Date:</p>
-		</div>
-		<div class="col">
-			<p class="lead">${project.dueDate}</p>
-		</div>
-	</div>
-	<c:if test="${project.lead.id == id}">
-		<a href="/projects/${project.id}/edit" class="btn btn-success">Edit</a>
-		<form action="/projects/${project.id}/delete" method="post">
+<div class="container mt-3">
+	<a href="/dashboard" class="lead">Dashboard</a>
+	<p class="lead"><span class="fw-bold">Project:</span>  ${project.title}</p>
+	<p class="lead"><span class="fw-bold">Description:</span>  ${project.description}</p>
+	<p class="lead"><span class="fw-bold">Due Date:</span>  <fmt:formatDate type="date" dateStyle="long" value="${project.dueDate}"/></p>
+		
+	<c:if test="${project.lead.id == user.id}">
+	<div class="d-flex align-items-center gap-2 mb-3">
+		<a href="/projects/${project.id}/edit" class="btn btn-info">Edit</a>
+		<form class="mb-0" action="/projects/${project.id}/delete" method="post">
     		<input type="hidden" name="_method" value="delete">
     		<button class="btn btn-danger" type="submit">Delete</button>
 		</form>
+	</div>
 	</c:if>
-	<c:forEach var="user" items="${project.users}">
-		<c:if test="${user.id == id}">
-			<a href="/projects/${project.id}/tasks">See tasks</a>
-		</c:if>
-	</c:forEach>
+	
+	<c:if test="${project.users.contains(user)}">
+		<a href="/projects/${project.id}/tasks" class="lead">See tasks</a>
+	</c:if>
 	
 </div>
 </t:base>

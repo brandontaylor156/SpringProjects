@@ -25,7 +25,6 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotEmpty
     @Size(min=3, message="Description must be at least 3 characters long")
     private String description;
     

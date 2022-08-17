@@ -8,7 +8,7 @@
 <title>Project Manager Dashboard</title>
 <t:base>
 <div class="container">
-	<h1 class="display-1 m-5">Welcome, ${user.firstName}!</h1>
+	<h3 class="display-3">Welcome, ${user.firstName}</h3>
 	<div class="in-line">
 		<a class="lead" href="/projects/new">New Project</a>
 		<a class="lead" href="/logout">Logout</a>
@@ -16,6 +16,12 @@
 	
 	<h6 class="display-6">All Projects</h6>
 	<table class="table table-striped">
+		<colgroup>
+      		<col class="col-3"></col>
+      		<col class="col-3"></col>
+      		<col class="col-3"></col>
+      		<col class="col-3"></col>
+    	</colgroup>
 		<thead>
 			<tr>
 				<th>Project</th>
@@ -27,13 +33,13 @@
 		<tbody>
 			<c:forEach var="project" items="${otherProjects}">
 			<tr>
-				<td><a href="/projects/${project.id}">${project.title}</a></td>
-				<td>${project.lead.firstName} ${project.lead.lastName}</td>
-				<td>${project.dueDate}</td>
-				<td>
-					<form action="/projects/${project.id}/join" method="post">
+				<td class="align-middle"><a href="/projects/${project.id}">${project.title}</a></td>
+				<td class="align-middle">${project.lead.firstName} ${project.lead.lastName}</td>
+				<td class="align-middle"><fmt:formatDate type="date" dateStyle="long" value="${project.dueDate}"/></td>
+				<td class="align-middle">
+					<form class="mb-0" action="/projects/${project.id}/join" method="post">
     					<input type="hidden" name="_method" value="put">
-    					<button class="btn btn-primary" type="submit">join Team</button>
+    					<button class="btn btn-primary" type="submit">Join Team</button>
 					</form>
 				</td>
 			</tr>
@@ -43,6 +49,12 @@
 	
 	<h6 class="display-6">Your Projects</h6>
 	<table class="table table-striped">
+		<colgroup>
+      		<col class="col-3"></col>
+      		<col class="col-3"></col>
+      		<col class="col-3"></col>
+      		<col class="col-3"></col>
+    	</colgroup>
 		<thead>
 			<tr>
 				<th>Project</th>
@@ -54,20 +66,20 @@
 		<tbody>
 			<c:forEach var="project" items="${projects}">
 			<tr>
-				<td><a href="/projects/${project.id}">${project.title}</a></td>
-				<td>${project.lead.firstName} ${project.lead.lastName}</td>
-				<td>${project.dueDate}</td>
-				<td>
+				<td class="align-middle"><a href="/projects/${project.id}">${project.title}</a></td>
+				<td class="align-middle">${project.lead.firstName} ${project.lead.lastName}</td>
+				<td class="align-middle"><fmt:formatDate type="date" dateStyle="long" value="${project.dueDate}"/></td>
+				<td class="d-flex align-items-center gap-2">
 					<c:choose> 
 						<c:when test="${project.lead.id == user.id}">
-							<a href="/projects/${project.id}/edit" class="btn btn-success">edit</a>
-							<form action="/projects/${project.id}/delete" method="post">
+							<a href="/projects/${project.id}/edit" class="btn btn-info">Edit</a>
+							<form class="mb-0" action="/projects/${project.id}/delete" method="post">
     							<input type="hidden" name="_method" value="delete">
-    							<button class="btn btn-danger" type="submit">delete</button>
+    							<button class="btn btn-danger" type="submit">Delete</button>
 							</form>
 						</c:when>
 						<c:otherwise>
-							<form action="/projects/${project.id}/leave" method="post">
+							<form class="mb-0" action="/projects/${project.id}/leave" method="post">
     							<input type="hidden" name="_method" value="put">
     							<button class="btn btn-warning" type="submit">Leave</button>
 							</form>

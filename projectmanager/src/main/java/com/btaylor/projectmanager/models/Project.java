@@ -33,15 +33,14 @@ public class Project {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @NotEmpty(message="Title is required!")
+    @NotEmpty(message="Title is required")
     private String title;
-    
-    @NotEmpty(message="Description is required!")
+   
     @Size(min=3, message="Description must be at least 3 characters long")
     private String description;
     
     @NotNull(message="Date is required")
-    @Future
+    @Future(message="Must be future date")
     @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date dueDate;
     
