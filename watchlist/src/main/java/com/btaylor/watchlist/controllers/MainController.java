@@ -30,6 +30,7 @@ public class MainController {
 	@Autowired
 	MovieService movieService;
 	
+	/************************************************************************************/
 	
 	@GetMapping("/dashboard")
 	public String dashboard(Model model, HttpSession session) {
@@ -45,6 +46,8 @@ public class MainController {
 		return "/views/dashboard.jsp";
 	}
 	
+	/************************************************************************************/
+	
 	@GetMapping("/movies/new")
 	public String newMovie(
 			@ModelAttribute("movie") Movie movie, HttpSession session, Model model) {
@@ -54,6 +57,8 @@ public class MainController {
 		model.addAttribute("id", (Long)session.getAttribute("id"));
 		return "/views/newMovie.jsp";
 	}
+	
+	/************************************************************************************/
 	
 	@PostMapping("/movies/new")
 	public String addMovie(
@@ -70,6 +75,8 @@ public class MainController {
 		}
 	}
 	
+	/************************************************************************************/
+	
 	@GetMapping("/movies/{id}")
 	public String showMovie(@PathVariable("id") Long id, HttpSession session, Model model) {
 		if (session.getAttribute("id")==null)
@@ -81,7 +88,7 @@ public class MainController {
 		return "/views/showMovie.jsp";
 	}
 	
-	
+	/************************************************************************************/
 	
 	@GetMapping("/movies/{id}/edit")
 	public String editMovie(@PathVariable("id") Long id, HttpSession session, Model model) {
@@ -93,6 +100,8 @@ public class MainController {
 		model.addAttribute("id", (Long)session.getAttribute("id"));
 		return "/views/editMovie.jsp";
 	}
+	
+	/************************************************************************************/
 	
 	@PutMapping("/movies/{id}/edit")
 	public String updateMovie(@Valid @ModelAttribute("movie") Movie movie, 
@@ -114,6 +123,8 @@ public class MainController {
 		}
 	}
 	
+	/************************************************************************************/
+	
 	@PutMapping("/movies/{id}/join")
 	public String joinMovie(@PathVariable("id") Long id, HttpSession session) {
 		if (session.getAttribute("id")==null)
@@ -126,6 +137,8 @@ public class MainController {
 		
 		return "redirect:/dashboard";
 	}
+	
+	/************************************************************************************/
 	
 	@PutMapping("/movies/{id}/cancel")
 	public String leaveMovie(@PathVariable("id") Long id, HttpSession session) {
@@ -147,6 +160,8 @@ public class MainController {
 		return "redirect:/dashboard";
 	}
 	
+	/************************************************************************************/
+	
 	@DeleteMapping("/movies/{id}/delete")
 	public String delete(@PathVariable("id") Long id, HttpSession session) {
 		if (session.getAttribute("id")==null)
@@ -155,6 +170,8 @@ public class MainController {
 		movieService.deleteMovie(id);
 		return "redirect:/dashboard";
 	}
+	
+	/************************************************************************************/
 	
 	@GetMapping("/movies/search")
 	public String searchMovies(

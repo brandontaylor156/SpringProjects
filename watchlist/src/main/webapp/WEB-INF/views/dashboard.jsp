@@ -9,7 +9,7 @@
 <title>The WatchList</title>
 <t:base>
 	<div class="container">
-		<h1 class="display-1 mt-5">Welcome, ${user.username}</h1>
+		<h1 class="display-1">Welcome, ${user.username}</h1>
 		<a class="lead" href="/logout">Logout</a> <a class="lead"
 			href="/movies/new">Add a Movie to Your Watch List</a>
 
@@ -40,7 +40,7 @@
 							<c:choose>
 								<c:when test="${movie.creator.id == user.id}">
 
-									<a href="/movies/${movie.id}/edit" class="btn btn-success">Edit</a>
+									<a href="/movies/${movie.id}/edit" class="btn btn-info">Edit</a>
 									<form class="mb-0" action="/movies/${movie.id}/delete" method="post">
 										<input type="hidden" name="_method" value="delete">
 										<button class="btn btn-danger" type="submit">Delete</button>
@@ -48,7 +48,7 @@
 									
 								</c:when>
 								<c:otherwise>
-									<button class="btn btn-success" disabled>Edit</button>
+									<button class="btn btn-info" disabled>Edit</button>
 									<button class="btn btn-danger" disabled>Delete</button>
 								</c:otherwise>
 							</c:choose>
@@ -93,7 +93,7 @@
 						<td class="align-middle">${movie.genre}</td>
 						<td class="align-middle">${movie.year}</td>
 						<td class="d-flex align-items-center gap-2">
-							<a href="/movies/${movie.id}/edit" class="btn btn-success">Edit</a>
+							<a href="/movies/${movie.id}/edit" class="btn btn-info">Edit</a>
 							<form class="mb-0" action="/movies/${movie.id}/delete" method="post">
 								<input type="hidden" name="_method" value="delete">
 								<button class="btn btn-danger" type="submit">Delete</button>

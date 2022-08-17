@@ -7,7 +7,7 @@
 
 <title>The WatchList</title>
 <t:base>
-<div class="container mt-5">
+<div class="container d-flex vh-100 justify-content-center flex-column">
 	<h6 class="display-6 mb-5">The WatchList</h6>
 	
 	<div class="row">

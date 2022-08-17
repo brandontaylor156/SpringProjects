@@ -51,37 +51,40 @@ public class UserController {
 		return "redirect:/";
 	}
 	
+	/*********************************************************************/
+	
 	@PostMapping("/register")
 	public String register(@Valid @ModelAttribute("newUser") User newUser,
 			BindingResult result, Model model, HttpSession session) {
 
-		User potentialUser =  userService.register(newUser, result);
+		User registerUser =  userService.register(newUser, result);
 		
 		if(result.hasErrors()) {
 			model.addAttribute("newLogin", new LoginUser());
 			return "/views/login.jsp";
 		}
 		else {
-			session.setAttribute("id", newUser.getId());
-			session.setAttribute("name", newUser.getUsername());
+			session.setAttribute("id", registerUser.getId());
+			session.setAttribute("name", registerUser.getUsername());
 			return "redirect:/dashboard";
 		}
 	}
+	
+	/***********************************************************************/
 	
 	@PostMapping("/login")
 	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin, 
 			BindingResult result, Model model, HttpSession session) {
 		
-		User potentialUser = userService.login(newLogin, result);
+		User loginUser = userService.login(newLogin, result);
 		
 		if(result.hasErrors()) {
 			model.addAttribute("newUser", new User());
 			return "/views/login.jsp";
 		}
 		else {
-			User loggedUser = userService.login(newLogin, result);
-			session.setAttribute("id", loggedUser.getId());
-			session.setAttribute("name", loggedUser.getUsername());
+			session.setAttribute("id", loginUser.getId());
+			session.setAttribute("name", loginUser.getUsername());
 			return "redirect:/dashboard";
 		}
 	}

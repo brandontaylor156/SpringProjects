@@ -7,11 +7,11 @@
 
 <title>The WatchList</title>
 <t:base>
-<div class="container mt-5">
+<div class="container mt-3">
 	<h3 class="display-3">Movie Details</h3>
 	<div class="in-line">
-		<a href="/dashboard">Dashboard</a>
-		<a href="/movies/new">Add a Movie to Your Watch List</a>
+		<a href="/dashboard" class="lead">Dashboard</a>
+		<a href="/movies/new" class="lead">Add a Movie to Your Watch List</a>
 	</div>
 	<h6 class="display-6">Movie Title: ${movie.title}</h6>
 	<p class="lead"><span class="fw-bold">Posted by:</span> ${movie.creator.username}</p>
@@ -22,7 +22,7 @@
 	
 	<c:if test="${movie.creator.id == id}">
 	<div class="d-flex align-items-center gap-2">
-		<a href="/movies/${movie.id}/edit" class="btn btn-success">Edit</a>
+		<a href="/movies/${movie.id}/edit" class="btn btn-info">Edit</a>
 		<form class="mb-0" action="/movies/${movie.id}/delete" method="post">
     		<input type="hidden" name="_method" value="delete">
     		<button class="btn btn-danger" type="submit">Delete</button>
